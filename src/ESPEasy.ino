@@ -1166,13 +1166,14 @@ boolean checkSystemTimers()
 \*********************************************************************************************/
 void backgroundtasks()
 {
+	yield();
   tcpCleanup();
 
   if (Settings.UseSerial)
     if (Serial.available())
       if (!PluginCall(PLUGIN_SERIAL_IN, 0, dummyString))
         serial();
-
+	yield();
   // process DNS, only used if the ESP has no valid WiFi config
   if (wifiSetup)
     dnsServer.processNextRequest();
